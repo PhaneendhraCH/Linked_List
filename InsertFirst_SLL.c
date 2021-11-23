@@ -47,7 +47,7 @@ void insertfirst(int number){
     addhead  = malloc(sizeof(struct node));
     
     addhead->data = number;
-    addhead->link = head->link;
+    addhead->link = head;
     head = addhead;
 }
 
