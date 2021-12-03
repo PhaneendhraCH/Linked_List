@@ -78,6 +78,7 @@ void sort_linkedlist(struct node *root){
         }
         
     }
+	printf("\nLinked List Sorted successfully\n");
 }
 
 
