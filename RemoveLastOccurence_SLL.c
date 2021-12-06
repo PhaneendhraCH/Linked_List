@@ -1,8 +1,7 @@
 /*
 
     Remove Last Occurence Node from a Linked List
-    
-    P.S : Need to update more
+
 */
 
 #include <stdio.h>
@@ -50,35 +49,42 @@ struct node *lastoccurence(struct node *prior,
                         int value){
     
     if (current==NULL)
-        return;
-    
-    if (current->link ==NULL)
-    {
-        if (last!=NULL){
-            struct node *temp = last->link;
-            last->link = last->link->link;
+        {
+            if(last!=NULL && prior!=NULL){          // Removes last occurence of the node
+            
+            struct node *temp = last->link;         // store node to be removed
+            
+            last->link = last->link->link;          
+            free(temp);                             // free last occurence node
+            return 0;
+            }
+            
+            else if(last==NULL && prior!=NULL){     // This is for node present at starting position
+            struct node *temp = head;
+            head  = head->link;
             free(temp);
-            return;
-        }
-        
-        else{
+            return 0;
+            }
+            
+            else{                                   // If the node is not found 
             printf("Last Occurence not found");
-            return;
+            return NULL;
         }
-        
-    }
+        }
 
-    if (current->data == value){
 
-       last = prior; 
-       prior = current;
-       return lastoccurence(prior,last,current->link,value);
+    if (current->data == value){                    // if the value to be removed is present
+
+       
+       last = prior;                                // assign last with prior
+       prior = current;                             // assign prior with current (prior contains a node before current node)
+       return lastoccurence(prior,last,current->link,value);    // traverse LL until last node
 
     }
     
-    else{
-        prior = current;
-        return lastoccurence(prior,last,current->link,value);
+    else{                                           // if the value to be removed is not present
+        prior = current;                            // assign prior with current (prior contains a node before current node)
+        return lastoccurence(prior,last,current->link,value);   // traverse LL until last node
     }
 }
 
@@ -104,7 +110,7 @@ void display(struct node *root)
 int main()
 {
 head = insert(head,11);
-insert(head,20);
+insert(head,20); 
 insert(head,35);
 insert(head,38);
 insert(head,39);
@@ -113,7 +119,7 @@ insert(head,38);
 
 display(head);
 
-lastoccurence(NULL,NULL,head,39);
+lastoccurence(NULL,NULL,head,38);
 printf("\n");
 display(head);
 }
