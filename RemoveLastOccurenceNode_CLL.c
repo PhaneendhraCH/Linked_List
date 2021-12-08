@@ -43,11 +43,10 @@ struct node *insert(struct node *root,int number){
    
 }
 
-struct node *lastoccurence(struct node *prior,
-                        struct node *last,
-                        struct node *current,
+struct node *lastoccurence(struct node *current,
                         int value){
                             
+    static struct node *prior,*last;                    
     static int flag = 0;
     
     if (current->link==head)
@@ -96,13 +95,13 @@ struct node *lastoccurence(struct node *prior,
        flag = 1;                                    // assign flag to one if value is present in node
        last = prior;                                // assign last with prior
        prior = current;                             // assign prior with current (prior contains a node before current node)
-       return lastoccurence(prior,last,current->link,value);    // traverse LL until last node
+       return lastoccurence(current->link,value);    // traverse LL until last node
 
     }
     
     else{                                           // if the value to be removed is not present
         prior = current;                            // assign prior with current (prior contains a node before current node)
-        return lastoccurence(prior,last,current->link,value);   // traverse LL until last node
+        return lastoccurence(current->link,value);   // traverse LL until last node
     }
 }
 
@@ -139,7 +138,7 @@ insert(head,38);
 
 display(head);
 
-lastoccurence(NULL,NULL,head,38);
+lastoccurence(head,38);
 printf("\n");
 display(head);
 }
