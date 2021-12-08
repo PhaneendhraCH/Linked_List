@@ -47,9 +47,13 @@ struct node *lastoccurence(struct node *prior,
                         struct node *last,
                         struct node *current,
                         int value){
+                            
+    static int flag = 0;
     
     if (current==NULL)
         {
+            if (flag){
+                
             if(last!=NULL && prior!=NULL){          // Removes last occurence of the node
             
             struct node *temp = last->link;         // store node to be removed
@@ -66,16 +70,17 @@ struct node *lastoccurence(struct node *prior,
             return 0;
             }
             
+            
+            }
             else{                                   // If the node is not found 
             printf("Last Occurence not found");
             return NULL;
         }
         }
 
-
     if (current->data == value){                    // if the value to be removed is present
-
        
+       flag = 1;                                    // assign flag to one if value is present in node
        last = prior;                                // assign last with prior
        prior = current;                             // assign prior with current (prior contains a node before current node)
        return lastoccurence(prior,last,current->link,value);    // traverse LL until last node
@@ -119,7 +124,7 @@ insert(head,38);
 
 display(head);
 
-lastoccurence(NULL,NULL,head,38);
+lastoccurence(NULL,NULL,head,35);
 printf("\n");
 display(head);
 }
