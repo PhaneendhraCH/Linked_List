@@ -41,6 +41,8 @@ struct node *insert(struct node *root,int number){
         root->link = newnode;
         newnode->prev = root;
         newnode->link = head;
+        tail = newnode;
+        head->prev = tail;
        
    }
    
@@ -82,8 +84,7 @@ head = insert(head,10);
 insert(head,20);
 insert(head,30);
 insert(head,40);
-
-head->prev = tail = insert(head,50);
+insert(head,50);
 
 display();
 display_back();
