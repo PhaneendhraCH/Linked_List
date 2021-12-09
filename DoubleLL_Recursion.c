@@ -40,7 +40,7 @@ struct node *insert(struct node *root,int number){
         
         root->link = newnode;
         newnode->prev = root;
-       
+        tail = newnode;         // tail gets updated for every insertion of a node
    }
    
    //return root;
@@ -76,7 +76,7 @@ head = insert(head,10);
 insert(head,20);
 insert(head,30);
 insert(head,40);
-tail = insert(head,50);
+insert(head,50);
 
 display();
 display_back();
